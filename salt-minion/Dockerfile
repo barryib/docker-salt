@@ -25,5 +25,3 @@ ADD . /app
 RUN chmod +x /app/bin/boot-minion.sh
 
 ENTRYPOINT ["/app/bin/boot-minion.sh"]
-
-#CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]  
