@@ -7,13 +7,15 @@ Docker image for salt-minion
 
 Run container
 -------------
+Link the minion with a salt-master container
+
 `docker run --link <SALT_MASTER_CONTAINER_NAME>:minion barryib/salt-minion`
 
-To set the minion hostname
+Run the minion container by seting its hostname
 
 `docker run --link <SALT_MASTER_CONTAINER_NAME>:minion -h <MINION_HOSTNAME> barryib/salt-minion`
 
-To use a particular config file
+Run the minion with an external config file
 
 `docker run -e "MINION_CONFIG_URL=<CONFIG_URL>" barryib/salt-minion`
 
