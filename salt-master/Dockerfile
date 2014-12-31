@@ -13,7 +13,6 @@ RUN echo "deb http://debian.saltstack.com/debian wheezy-saltstack main" > /etc/a
 
 # Keep upstart from complaining
 RUN dpkg-divert --local --rename --add /sbin/initctl
-#RUN ln -s /bin/true /sbin/initctl
 
 RUN apt-get install -y \
 	salt-master \
@@ -24,6 +23,12 @@ RUN mkdir -p -m0755 /var/run/sshd
 
 ADD ./supervisor-salt.conf /etc/supervisor/conf.d/
 
+# Copy build files to container root
+RUN mkdir /app
+ADD . /app
+
+RUN chmod +x /app/bin/boot-master.sh
+
 EXPOSE 4505 4506
 
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]  
+ENTRYPOINT ["/app/bin/boot-master.sh"]
